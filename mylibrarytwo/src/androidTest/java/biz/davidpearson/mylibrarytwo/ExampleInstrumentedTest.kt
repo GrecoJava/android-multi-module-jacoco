@@ -1,4 +1,4 @@
-package biz.davidpearson.mylibraryone
+package biz.davidpearson.mylibrarytwo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
