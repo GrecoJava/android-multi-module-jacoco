@@ -1,0 +1,72 @@
+task jacocoTestCoverageReport(type: JacocoReport) {
+    group = "verification"
+    description = "Generate JaCoCo coverage report"
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = [
+            "**/R.class",
+            "**/R\$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "android/**/*.*",
+            "androidx/**/*.*",
+            "com/google/android/**/*.*",
+            "**/BR.*",
+            "**.BR.class"
+    ]
+
+    def appJavaDebugClassFiles = "${rootProject.rootDir}/app/build/intermediates/javac/debug/classes"
+    def libOneJavaDebugClassFiles = "${rootProject.rootDir}/mylibraryone/build/intermediates/javac/debug/classes"
+    def libTwoJavaDebugClassFiles = "${rootProject.rootDir}/mylibrarytwo/build/intermediates/javac/debug/classes"
+    def libThreeJavaDebugClassFiles = "${rootProject.rootDir}/mylibrarythree/build/intermediates/javac/debug/classes"
+
+    def appJavaDebugTree = fileTree(dir: appJavaDebugClassFiles, excludes: fileFilter)
+    def libOneJavaDebugTree = fileTree(dir: libOneJavaDebugClassFiles, excludes: fileFilter)
+    def libTwoJavaDebugTree = fileTree(dir: libTwoJavaDebugClassFiles, excludes: fileFilter)
+    def libThreeJavaDebugTree = fileTree(dir: libThreeJavaDebugClassFiles, excludes: fileFilter)
+
+    def appKotlinDebugClassFiles = "${rootProject.rootDir}/app/build/tmp/kotlin-classes/debug"
+    def libOneKotlinDebugClassFiles = "${rootProject.rootDir}/mylibraryone/build/tmp/kotlin-classes/debug"
+    def libTwoKotlinDebugClassFiles = "${rootProject.rootDir}/mylibrarytwo/build/tmp/kotlin-classes/debug"
+    def libThreeKotlinDebugClassFiles = "${rootProject.rootDir}/mylibrarythree/build/tmp/kotlin-classes/debug"
+
+    def appKotlinDebugTree = fileTree(dir: appKotlinDebugClassFiles, excludes: fileFilter)
+    def libOneKotlinDebugTree = fileTree(dir: libOneKotlinDebugClassFiles, excludes: fileFilter)
+    def libTwoKotlinDebugTree = fileTree(dir: libTwoKotlinDebugClassFiles, excludes: fileFilter)
+    def libThreeKotlinDebugTree = fileTree(dir: libThreeKotlinDebugClassFiles, excludes: fileFilter)
+
+    def appMainSrc = "${rootProject.rootDir}/app/src/main/java"
+    def libOneMainSrc = "${rootProject.rootDir}/mylibraryone/src/main/java"
+    def libTwoMainSrc = "${rootProject.rootDir}/mylibrarytwo/src/main/java"
+    def libThreeMainSrc = "${rootProject.rootDir}/mylibrarythree/src/main/java"
+
+
+    getSourceDirectories().setFrom(files([appMainSrc,
+                                          libOneMainSrc,
+                                          libTwoMainSrc,
+                                          libThreeMainSrc]))
+
+    getClassDirectories().setFrom(files([appJavaDebugTree,
+                                         appKotlinDebugTree,
+                                         libOneJavaDebugTree,
+                                         libOneKotlinDebugTree,
+                                         libTwoJavaDebugTree,
+                                         libTwoKotlinDebugTree,
+                                         libThreeJavaDebugTree,
+                                         libThreeKotlinDebugTree]))
+
+    getExecutionData().
+            setFrom(fileTree(dir: rootProject.rootDir, includes: ["**/*.exec", "**/*.ec"]))
+
+}
+
+jacocoTestCoverageReport.dependsOn(":app:testDebugUnitTest")
+jacocoTestCoverageReport.dependsOn(":mylibraryone:testDebugUnitTest")
+jacocoTestCoverageReport.dependsOn(":mylibrarytwo:testDebugUnitTest")
+jacocoTestCoverageReport.dependsOn(":mylibrarythree:testDebugUnitTest")
+
+

@@ -1,17 +1,22 @@
 package biz.davidpearson.androidmultimodulejacocodemo;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import biz.davidpearson.androidmultimodulejacocodemo.model.Mork;
+import biz.davidpearson.androidmultimodulejacocodemo.model.Mxyztplk;
+import biz.davidpearson.mylibraryone.Bazinga;
+import biz.davidpearson.mylibraryone.Pasghetti;
+import biz.davidpearson.mylibrarythree.Pigglywiggly;
+import biz.davidpearson.mylibrarytwo.Supercalifragilisticexpialidocious;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,14 +28,31 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
+
+        TextView tv = findViewById(R.id.message);
+
+        Mxyztplk mxyztplk = Mxyztplk.MxyztplkBuilder.aMxyztplk().withYear(1944).withEra("Bronze").build();
+
+        Mork mork = new Mork.Builder().naNuNaNu("Shazbot").build();
+
+        Supercalifragilisticexpialidocious
+                supercalifragilisticexpialidocious =
+                new Supercalifragilisticexpialidocious(5);
+
+        Pasghetti pasghetti = new Pasghetti("Rustiche");
+
+        Pigglywiggly pigglywiggly = new Pigglywiggly("210 Second Avenue, Gallipolis, OH 45631");
+
+        Bazinga bazinga = new Bazinga("Leonard Leakey Hofstadter");
+
+
+
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

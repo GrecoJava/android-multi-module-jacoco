@@ -1,6 +1,6 @@
 object Depends {
     object Kotlin {
-        const val STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+        const val STDLIB = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}"
     }
 
     /**
@@ -15,6 +15,7 @@ object Depends {
         const val MEDIA = "androidx.media:media:1.0.0"
         const val VECTOR_DRAWABLE_ANIMATED = "androidx.vectordrawable:vectordrawable-animated:1.1.0"
         const val WEBKIT = "androidx.webkit:webkit:1.1.0"
+        const val CORE_KTX = "androidx.core:core-ktx:1.2.0"
 
         object Navigation {
             const val UI = "androidx.navigation:navigation-ui:2.2.2"

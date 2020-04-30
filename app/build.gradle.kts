@@ -6,6 +6,9 @@ plugins {
     kotlin("android.extensions")
 }
 
+apply(from = "../jacoco.gradle")
+apply(from = "codeCoverageReport.gradle")
+
 android {
     compileSdkVersion(Versions.COMPILE_SDK)
 
@@ -26,6 +29,9 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isTestCoverageEnabled = true
+        }
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.txt")
@@ -44,20 +50,17 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(":mylibraryone"))
+    implementation(project(":mylibrarytwo"))
+    implementation(project(":mylibrarythree"))
 
+    androidTestImplementation(Depends.AndroidX.Test.ESPRESSO_CORE)
+    androidTestImplementation(Depends.AndroidX.Test.EXT_JUNIT)
     implementation(Depends.AndroidX.APPCOMPAT)
-
-    implementation(Depends.Google.MATERIAL)
-
     implementation(Depends.AndroidX.CONSTRAINT_LAYOUT)
     implementation(Depends.AndroidX.Navigation.FRAGMENT)
     implementation(Depends.AndroidX.Navigation.UI)
-
+    implementation(Depends.Google.MATERIAL)
     testImplementation(Depends.JUNIT)
-
-    androidTestImplementation(Depends.AndroidX.Test.EXT_JUNIT)
-
-    androidTestImplementation(Depends.AndroidX.Test.ESPRESSO_CORE)
 }

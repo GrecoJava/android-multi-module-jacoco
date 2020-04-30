@@ -1,0 +1,51 @@
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = Versions.JACOCO
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+//task jacocoTestCoverageReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+//    group = "verification"
+//    description = "Generate JaCoCo coverage report"
+//
+//    reports {
+//        xml.enabled = true
+//        html.enabled = true
+//    }
+//
+//    def fileFilter = [
+//            "**/R.class",
+//            "**/R\$*.class",
+//            "**/BuildConfig.*",
+//            "**/Manifest*.*",
+//            "android/**/*.*",
+//            "androidx/**/*.*",
+//            "com/google/android/**/*.*",
+//            "**/BR.*",
+//            "**.BR.class"
+//    ]
+//
+//    def appJavaDebugClassFiles = "${rootProject.rootDir}/app/build/intermediates/javac/debug/classes"
+//
+//    def appJavaDebugTree = fileTree(dir: appJavaDebugClassFiles, excludes: fileFilter)
+//
+//    def appKotlinDebugClassFiles = "${rootProject.rootDir}/app/build/tmp/kotlin-classes/debug"
+//
+//    def appKotlinDebugTree = fileTree(dir: appKotlinDebugClassFiles, excludes: fileFilter)
+//
+//    def appMainSrc = "${rootProject.rootDir}/app/src/main/java"
+//    // def appMainKotlinSrc = "${rootProject.rootDir}/app/src/main/kotlin"
+//
+//
+//    getSourceDirectories().setFrom(files([appMainSrc]))
+//
+//    getClassDirectories().setFrom(files([appJavaDebugTree, appKotlinDebugTree]))
+//
+//    getExecutionData().
+//            setFrom(fileTree(dir: rootProject.rootDir, includes: ["**/*.exec", "**/*.ec"]))
+//
+//}

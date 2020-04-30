@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -16,5 +17,9 @@ pluginManagement {
     }
 }
 
-include(":app")
 rootProject.name = "Android Multi-Module JaCoCo Demo"
+
+include(":app")
+include(":mylibraryone")
+include(":mylibrarytwo")
+include(":mylibrarythree")
